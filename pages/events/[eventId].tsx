@@ -1,7 +1,7 @@
 const EventDetailPage = () => {
   return (
     <div>
-      <h1>EVENT DETAIL PAGE</h1>
+      <h1>EVENT DETAIL</h1>
     </div>
   );
 };
