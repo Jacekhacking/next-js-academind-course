@@ -5,7 +5,7 @@ const HomePage = () => {
   const featuredEvents = getFeaturedEvents();
 
   return (
-    <div>
+    <div className="h-screen flex items-center justify-center">
       <EventList items={featuredEvents} />
     </div>
   );
