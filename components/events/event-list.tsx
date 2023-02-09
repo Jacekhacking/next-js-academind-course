@@ -2,7 +2,7 @@ import EventItem from "./event-item";
 const EventList = (props) => {
   const { items } = props;
   return (
-    <ul>
+    <ul className="w-3/5 max-w-2xl m-auto">
       {items.map((event) => (
         <EventItem
           key={event.id}
