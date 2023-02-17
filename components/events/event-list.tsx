@@ -1,9 +1,24 @@
+// import { ReactPropTypes } from "react";
 import EventItem from "./event-item";
-const EventList = (props) => {
-  const { items } = props;
+
+interface EventListProps {
+  events: {
+    id: string;
+    date: string;
+    description: string;
+    image: string;
+    isFeatured: boolean;
+    location: string;
+    title: string;
+  }[];
+}
+
+const EventList = (props: EventListProps) => {
+  const { events } = props;
+
   return (
     <ul className="w-3/5 max-w-2xl m-auto">
-      {items.map((event) => (
+      {events.map((event) => (
         <EventItem
           key={event.id}
           id={event.id}

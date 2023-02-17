@@ -3,7 +3,15 @@ import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
 
-const EventItem = (props) => {
+interface EventItemProps {
+  title: string;
+  image: string;
+  date: string;
+  location: string;
+  id: string;
+}
+
+const EventItem = (props: EventItemProps) => {
   const { title, image, date, location, id } = props;
 
   const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
