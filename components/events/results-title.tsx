@@ -6,7 +6,8 @@ interface DateProps {
 }
 
 const ResultsTitle = (props: DateProps) => {
-  const { month, year } = props;
+  console.log(props);
+  const { year, month } = props;
   const date = new Date(year, month - 1).toLocaleString("en-US", {
     month: "long",
     year: "numeric",
@@ -14,7 +15,7 @@ const ResultsTitle = (props: DateProps) => {
 
   return (
     <div className=" py-10 flex flex-col items-center justify-center">
-      <h2 className="text-xl font-semibold pb-2">Events in {date}</h2>
+      <h2 className="text-xl font-semibold pb-2">Events in {date} </h2>
       <Button link="/events">Show all Events</Button>
     </div>
   );

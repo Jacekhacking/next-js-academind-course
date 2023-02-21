@@ -1,4 +1,7 @@
 import EventList from "../components/events/event-list";
+import { getFeaturedEvents } from "../helpers/api-util";
+
+import Head from "next/head";
 
 interface HomePageProps {
   events: {
@@ -12,13 +15,14 @@ interface HomePageProps {
   }[];
 }
 
-const HomePage = (props: HomePageProps) => {
-  const { events } = props;
-  const featuredEvents = events.filter((event) => event.isFeatured === true);
-
+const HomePage = ({ events }: HomePageProps) => {
   return (
     <div className="h-screen flex items-center justify-center">
-      <EventList events={featuredEvents} />
+      <Head>
+        <title>NextJS Events</title>
+        <meta name="description" content="Find a lot of great events!" />
+      </Head>
+      <EventList events={events} />
     </div>
   );
 };
@@ -26,23 +30,10 @@ const HomePage = (props: HomePageProps) => {
 export default HomePage;
 
 export async function getStaticProps() {
-  const url = await fetch(
-    "https://nextjs-course-ec31c-default-rtdb.firebaseio.com/events.json"
-  );
-  const data = await url.json();
-  const transformedEvents = [];
-  for (const key in data) {
-    transformedEvents.push({
-      id: key,
-      date: data[key].date,
-      description: data[key].description,
-      image: data[key].image,
-      isFeatured: data[key].isFeatured,
-      location: data[key].location,
-      title: data[key].title,
-    });
-  }
+  const featuredEvents = await getFeaturedEvents();
+
   return {
-    props: { events: transformedEvents },
+    props: { events: featuredEvents },
+    revalidate: 1800, // 30 minutes
   };
 }

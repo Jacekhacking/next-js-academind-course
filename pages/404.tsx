@@ -1,7 +1,7 @@
 const NotFound = () => {
   return (
-    <div>
-      <h1>This Page Was Not Found</h1>
+    <div className="flex justify-center items-center w-screen py-10">
+      <h1 className="text-4xl">This Page Was Not Found</h1>
     </div>
   );
 };
