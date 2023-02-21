@@ -1,6 +1,8 @@
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
+
 import Image from "next/image";
+
 
 interface EventDetail {
   title: string;
@@ -27,12 +29,15 @@ const EventDetailComponent = (props: EventDetail) => {
       </div>
 
       <div className=" row-start-3 row-end-5 col-span-full xl:col-start-3 xl:col-end-6 shadow-2xl bg-gray-800  flex items-center justify-center rounded-md  gap-1 z-20 mx-10 ">
+
         <Image
           src={"/" + image}
           alt={title}
           className=" m-5 w-60 h-60 rounded-full border-4 border-r-white "
           height={240}
           width={3000}
+
+
         />
         <div className=" flex flex-col justify-start ">
           <div>

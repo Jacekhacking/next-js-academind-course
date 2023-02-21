@@ -1,3 +1,4 @@
+
 import EventList from "../../components/events/event-list";
 import EventsSearch from "../../components/events/events-search";
 import { useRouter } from "next/router";
@@ -21,18 +22,21 @@ const AllEventsPage = (props: AllEventsProps) => {
   const router = useRouter();
 
   function onSearch(year: string, month: string) {
+
     const fullPath = `/events/${year}/${month}`;
     router.push(fullPath);
   }
 
   return (
     <>
+
       <Head>
         <title>All Events</title>
         <meta name="description" content="Find a lot of great events!" />
       </Head>
       <EventsSearch onSearch={onSearch} />
       <EventList events={events} />
+
     </>
   );
 };

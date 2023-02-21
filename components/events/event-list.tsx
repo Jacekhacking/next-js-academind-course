@@ -18,7 +18,9 @@ const EventList = (props: EventListProps) => {
 
   return (
     <ul className="w-3/5 max-w-2xl m-auto">
+
       {events.map((event) => (
+
         <EventItem
           key={event.id}
           id={event.id}

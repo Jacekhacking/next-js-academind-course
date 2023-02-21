@@ -18,11 +18,13 @@ interface HomePageProps {
 const HomePage = ({ events }: HomePageProps) => {
   return (
     <div className="h-screen flex items-center justify-center">
+
       <Head>
         <title>NextJS Events</title>
         <meta name="description" content="Find a lot of great events!" />
       </Head>
       <EventList events={events} />
+
     </div>
   );
 };

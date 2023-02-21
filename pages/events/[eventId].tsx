@@ -1,3 +1,4 @@
+
 import { getEventById, getFeaturedEvents } from "../../helpers/api-util";
 import Button from "../../components/ui/button";
 import EventDetailComponent from "../../components/events/event-detail";
@@ -18,15 +19,19 @@ interface EventDetailPagePropTypes {
 export default function EventDetailPage(props: EventDetailPagePropTypes) {
   const { event } = props;
 
+
   if (!event) {
     return (
       <div className="flex flex-col items-center justify-center py-10">
+
         <p className="text-center pb-4">Loading...</p>
+
       </div>
     );
   }
 
   return (
+
     <>
       <Head>
         <title> {event.title}</title>
@@ -41,6 +46,7 @@ export default function EventDetailPage(props: EventDetailPagePropTypes) {
         image={event.image}
       />
     </>
+
   );
 }
 

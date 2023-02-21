@@ -1,3 +1,4 @@
+
 import { getFilteredEvents } from "../../helpers/api-util";
 import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
@@ -6,6 +7,7 @@ import Head from "next/head";
 
 const FilteredEventsPage = ({ filteredEvents, date }) => {
   console.log(filteredEvents);
+
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-10">
@@ -14,6 +16,7 @@ const FilteredEventsPage = ({ filteredEvents, date }) => {
       </div>
     );
   }
+
   return (
     <>
       <Head>
@@ -25,6 +28,7 @@ const FilteredEventsPage = ({ filteredEvents, date }) => {
       </Head>
       <ResultsTitle year={date.year} month={date.month} />
       <EventList events={filteredEvents} />
+
     </>
   );
 };
