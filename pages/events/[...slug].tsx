@@ -1,42 +1,12 @@
-import { useRouter } from "next/router";
-const { getFilteredEvents } = require("../../dummy-data");
+
+import { getFilteredEvents } from "../../helpers/api-util";
 import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
+import Head from "next/head";
 
-const FilteredEventsPage = () => {
-  const router = useRouter();
-  const filterData = router.query.slug;
-
-  if (!filterData) {
-    return <p className="text-center">Loading</p>;
-  }
-
-  const filteredYear = filterData[0];
-  const filteredMonth = filterData[1];
-  const numYear = +filteredYear;
-  const numMonth = +filteredMonth;
-
-  const filteredEvents = getFilteredEvents({
-    year: numYear,
-    month: numMonth,
-  });
-
-  if (
-    isNaN(numYear) ||
-    isNaN(numMonth) ||
-    numYear > 2030 ||
-    numYear < 2020 ||
-    numMonth < 1 ||
-    numMonth > 12
-  ) {
-    return (
-      <div className="flex flex-col items-center justify-center py-10">
-        <p className="text-center pb-4">Invalid search please try again!</p>
-        <Button link="/events">Back to all </Button>
-      </div>
-    );
-  }
+const FilteredEventsPage = ({ filteredEvents, date }) => {
+  console.log(filteredEvents);
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
@@ -46,13 +16,52 @@ const FilteredEventsPage = () => {
       </div>
     );
   }
-  console.log(filteredEvents);
+
   return (
     <>
-      <ResultsTitle year={numYear} month={numMonth} />
-      <EventList items={filteredEvents} />
+      <Head>
+        <title>Filtered Events</title>
+        <meta
+          name="description"
+          content={`All events for ${date.month}/${date.year}.`}
+        />
+      </Head>
+      <ResultsTitle year={date.year} month={date.month} />
+      <EventList events={filteredEvents} />
+
     </>
   );
 };
 
 export default FilteredEventsPage;
+
+export async function getServerSideProps(context) {
+  const filterData = context.params.slug;
+
+  const filteredYear = filterData[0];
+  const filteredMonth = filterData[1];
+  const year = +filteredYear;
+  const month = +filteredMonth;
+
+  const filteredEvents = await getFilteredEvents({
+    year,
+    month,
+  });
+
+  if (
+    isNaN(year) ||
+    isNaN(month) ||
+    year > 2030 ||
+    year < 2020 ||
+    month < 1 ||
+    month > 12
+  ) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { filteredEvents, date: { year, month } },
+  };
+}

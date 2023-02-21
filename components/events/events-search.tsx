@@ -2,7 +2,10 @@ import { useRef } from "react";
 
 import Button from "../ui/button";
 
-const EventsSearch = (props) => {
+
+const EventsSearch = ({ onSearch }) => {
+
+
   const yearInputRef = useRef<HTMLSelectElement>();
   const monthInputRef = useRef<HTMLSelectElement>();
 
@@ -12,7 +15,9 @@ const EventsSearch = (props) => {
     const selectedYear = yearInputRef.current.value;
     const selectedMonth = monthInputRef.current.value;
 
-    props.onSearch(selectedYear, selectedMonth);
+
+    onSearch(selectedYear, selectedMonth);
+
   }
 
   return (
